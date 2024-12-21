@@ -2,16 +2,16 @@ import React from "react";
 import './css_folder/header.css'; // CSS ファイルをインポート
 import HomeIcon from "@mui/icons-material/Home";
 // import AddIcon from "@mui/icons-material/Add";
-import AudioFileOutlinedIcon from '@mui/icons-material/AudioFileOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import AudioIcon from '@mui/icons-material/AudioFileOutlined';
+import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 function Header() {
   return (
     <header className="header">
       <div className="header-left">
         {/* ロゴとタイトル */}
-        <AudioFileOutlinedIcon className="header-icon-logo" />
-        <p><span className="header-title">音楽データベース</span></p>
+        <AudioIcon className="header-icon-logo" />
+        <span className="header-title">音楽データベース</span>
       </div>
 
       <div className="header-center">
@@ -22,7 +22,7 @@ function Header() {
         </div>
         {/* 登録ボタン */}
         <div className="header-menu">
-          <AddCircleOutlineOutlinedIcon className="header-icon" />
+          <AddIcon className="header-icon" />
           <span>登録</span>
         </div>
       </div>
