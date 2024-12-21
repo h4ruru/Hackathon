@@ -55,7 +55,7 @@ const Musicdistribution = () => {
           </select>
         </div>
 
-        <button type="submit" className="submit-button"><SaveIcon /> 登録</button>
+        < button type="submit" className="submit-button"><SaveIcon /> 登録</button>
       </form>
     </div>
   );
