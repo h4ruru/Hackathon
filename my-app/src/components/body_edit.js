@@ -35,10 +35,6 @@ const EditForm = () => {
           <label htmlFor="lyricsType">歌詞のタイプ</label>
           <input type="text" id="lyricsType" name="lyricsType" />
         </div>
-        <div>
-          <label htmlFor="vocalRange">男声/女声（音域）</label>
-          <input type="text" id="vocalRange" name="vocalRange" />
-        </div>
         < button type="submit" className="submit-button"><SaveIcon /> 更新</button>
       </form>
     </div>
