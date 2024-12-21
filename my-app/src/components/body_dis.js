@@ -49,9 +49,9 @@ const Musicdistribution = () => {
           <label htmlFor="vocalRange">男声/女声（声域）</label>
           <select id="vocalRange">
             <option value="">選択してください</option>
-            <option value="pop">高い</option>
-            <option value="rock">普通</option>
-            <option value="jazz">低い</option>
+            <option>高い</option>
+            <option>普通</option>
+            <option>低い</option>
           </select>
         </div>
 

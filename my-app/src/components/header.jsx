@@ -5,7 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import AudioIcon from '@mui/icons-material/AudioFileOutlined';
 import AddIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
-function Header() {
+function Header({ onRegiClick, onHomeClick }) {
   return (
     <header className="header">
       <div className="header-left">
@@ -16,12 +16,12 @@ function Header() {
 
       <div className="header-center">
         {/* ホームボタン */}
-        <div className="header-menu">
+        <div className="header-menu" onClick={onHomeClick}>
           <HomeIcon className="header-icon" />
           <span>ホーム</span>
         </div>
         {/* 登録ボタン */}
-        <div className="header-menu">
+        <div className="header-menu" onClick={onRegiClick}>
           <AddIcon className="header-icon" />
           <span>登録</span>
         </div>
