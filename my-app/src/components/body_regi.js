@@ -45,16 +45,6 @@ const Musicdistribution = () => {
           <input type="text" id="lyricist" placeholder="歌詞のタイプを入力してください" />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="vocalRange">男声/女声（声域）</label>
-          <select id="vocalRange">
-            <option value="">選択してください</option>
-            <option>高い</option>
-            <option>普通</option>
-            <option>低い</option>
-          </select>
-        </div>
-
         < button type="submit" className="submit-button"><SaveIcon /> 登録</button>
       </form>
     </div>

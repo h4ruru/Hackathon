@@ -26,7 +26,7 @@ const Musicdistribution = () => {
             <option value="rock">ロック</option>
             <option value="jazz">ジャズ</option>
             <option value="classical">クラシック</option>
-            <option valie="hiphop">ヒップホップ</option>
+            <option value="hiphop">ヒップホップ</option>
           </select>
         </div>
 
@@ -43,16 +43,6 @@ const Musicdistribution = () => {
         <div className="form-group">
           <label htmlFor="lyricist">歌詞のタイプ</label>
           <input type="text" id="lyricist" placeholder="歌詞のタイプを入力してください" />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="vocalRange">男声/女声（声域）</label>
-          <select id="vocalRange">
-            <option value="">選択してください</option>
-            <option>高い</option>
-            <option>普通</option>
-            <option>低い</option>
-          </select>
         </div>
 
         <button type="submit" className="submit-button"><SearchIcon /> 検索</button>
