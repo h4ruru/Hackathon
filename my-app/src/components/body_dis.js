@@ -32,17 +32,39 @@ const Musicdistribution = ({ onResultClick }) => {
 
         <div className="form-group">
           <label htmlFor="mood">気分</label>
-          <input type="text" id="mood" placeholder="気分を入力してください" />
+          <select id="mood">
+            <option value="">選択してください</option>
+            <option value="happy">楽しい</option>
+            <option value="sadly">悲しい</option>
+            <option value="angry">怒っている</option>
+            <option value="calm">落ち着いている</option>
+            <option value="tired">疲れている</option>
+          </select>
         </div>
 
         <div className="form-group">
           <label htmlFor="situation">シチュエーション</label>
-          <input type="text" id="situation" placeholder="シチュエーションを入力してください" />
+          <select id="situation">
+            <option value="">選択してください</option>
+            <option value="relaxation">リラックスしたい</option>
+            <option value="commute">通勤・通学</option>
+            <option value="study">勉強</option>
+            <option value="drive">ドライブ</option>
+            <option value="party">パーティ</option>
+            <option value="motivate">モチベーションを高めたい・元気を出したい</option>
+          </select>
         </div>
 
         <div className="form-group">
-          <label htmlFor="lyricist">歌詞のタイプ</label>
-          <input type="text" id="lyricist" placeholder="歌詞のタイプを入力してください" />
+          <label htmlFor="lyricsType">歌詞のタイプ</label>
+          <select id="lyricsType">
+            <option value="">選択してください</option>
+            <option value="love">恋愛</option>
+            <option value="heartbreak">失恋</option>
+            <option value="encouragement">応援</option>
+            <option value="season">季節</option>
+            <option value="party">パーティ</option>
+          </select>
         </div>
 
         <button type="button" className="submit-button" onClick={onResultClick}><SearchIcon /> 検索</button>
