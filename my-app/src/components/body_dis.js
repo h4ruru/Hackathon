@@ -33,6 +33,7 @@ const Musicdistribution = ({ onResultClick }) => {
         ((song.lyricsType && song.lyricsType === lyricsType) || lyricsType === "")
       );
     });
+    // d2b394f40dffea770990ce06eb8a430ecf77180d
     setFilteredSongs(filtered);
   };
 
@@ -51,7 +52,7 @@ const Musicdistribution = ({ onResultClick }) => {
       <form className="form">
         <div className="form-group">
           <label htmlFor="songName">楽曲名</label>
-          <input 
+          <input
             type="text"
             id="songName"
             placeholder="楽曲名を入力してください"
@@ -62,7 +63,7 @@ const Musicdistribution = ({ onResultClick }) => {
 
         <div className="form-group">
           <label htmlFor="author">作詞・作曲者名</label>
-          <input 
+          <input
             type="text"
             id="author"
             placeholder="作詞・作曲者名を入力してください"
@@ -73,7 +74,7 @@ const Musicdistribution = ({ onResultClick }) => {
 
         <div className="form-group">
           <label htmlFor="genre">ジャンル</label>
-          <select 
+          <select
             id="genre"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
@@ -155,7 +156,12 @@ const Musicdistribution = ({ onResultClick }) => {
               <li key={index}>
                 <h4>{song.songName && song.songName !== "楽曲" ? song.songName : "楽曲名なし"}</h4>
                 <p>作詞・作曲者: {song.author || "作詞・作曲者名なし"}</p>
-                <p>YoutubeURL: {shortenUrl(song.youtubeURL) || "URLなし"}</p>
+                <p>
+                  YoutubeURL: {song.youtubeURL ?
+                    <a href={song.youtubeURL} >
+                      {shortenUrl(song.youtubeURL) || song.youtubeURL}
+                    </a> : "URLなし"}
+                </p>
                 <p>ジャンル: {song.genre || "ジャンル情報なし"}</p>
                 <p>気分: {song.mood || "気分情報なし"}</p>
                 <p>シチュエーション: {song.situation || "シチュエーション情報なし"}</p>

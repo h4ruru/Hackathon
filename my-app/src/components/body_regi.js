@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./css_folder/input.css";
 import SaveIcon from '@mui/icons-material/Save';
-import { addSong } from "../firebace/operation"; 
+import { addSong } from "../firebace/operation";
 
-function Musicdistribution(){
+function Musicdistribution() {
   const [songName, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [youtubeURL, setYoutubeURL] = useState("");
@@ -53,19 +53,19 @@ function Musicdistribution(){
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="songName">楽曲名</label>
-          <input 
-            type="text" id="songName" 
+          <input
+            type="text" id="songName"
             value={songName}
             onChange={(e) => setName(e.target.value)}
-            placeholder="楽曲名を入力してください" 
+            placeholder="楽曲名を入力してください"
             required
           />
         </div>
 
         <div className="form-group">
           <label htmlFor="author">作詞・作曲者名</label>
-          <input 
-            type="text" id="author" 
+          <input
+            type="text" id="author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="作詞・作曲者名を入力してください"
@@ -75,8 +75,8 @@ function Musicdistribution(){
 
         <div className="form-group">
           <label htmlFor="youtubeURL">YoutubeURL</label>
-          <input 
-            type="text" id="youtubeURL" 
+          <input
+            type="text" id="youtubeURL"
             value={youtubeURL}
             onChange={(e) => setYoutubeURL(e.target.value)}
             placeholder="YoutubeのURLを入力してください"
@@ -102,7 +102,7 @@ function Musicdistribution(){
 
         <div className="form-group">
           <label htmlFor="mood">気分</label>
-          <select 
+          <select
             id="mood"
             value={mood}
             onChange={(e) => setMood(e.target.value)}
@@ -119,7 +119,7 @@ function Musicdistribution(){
 
         <div className="form-group">
           <label htmlFor="situation">シチュエーション</label>
-          <select 
+          <select
             id="situation"
             value={situation}
             onChange={(e) => setSituation(e.target.value)}
@@ -137,7 +137,7 @@ function Musicdistribution(){
 
         <div className="form-group">
           <label htmlFor="lyricsType">歌詞のタイプ</label>
-          <select 
+          <select
             id="lyricsType"
             value={lyricsType}
             onChange={(e) => setLyricsType(e.target.value)}

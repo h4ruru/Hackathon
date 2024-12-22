@@ -32,7 +32,7 @@ function App() {
     <>
       <Header onRegiClick={handleRegiClick} onHomeClick={handleHomeClick} />
       {showDisplay && <Display onResultClick={handleResultClick} />}
-      {showResult && <Result />}
+      {/* {showResult && <Result />} */}
       {showResister && <Resister />}
     </>
   );
