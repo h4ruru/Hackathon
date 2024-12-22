@@ -60,3 +60,27 @@ h2 {
 .submit-button:hover {
   background-color: #3b41a1;
 }
+
+.container {
+  position: relative;
+  padding: 20px;
+}
+
+.success-message {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.success-message.show {
+  display: block;
+  opacity: 1;
+}
