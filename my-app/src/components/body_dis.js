@@ -154,7 +154,7 @@ const Musicdistribution = ({ onResultClick }) => {
           <ul>
             {filteredSongs.map((song, index) => (
               <li key={index}>
-                <h4>{song.songName && song.songName !== "楽曲" ? song.songName : "楽曲名なし"}</h4>
+                <h4>{song.songName && song.songName !== "" && song.songName !== null ? song.songName : "楽曲名なし"}</h4>
                 <p>作詞・作曲者: {song.author || "作詞・作曲者名なし"}</p>
                 <p>
                   YoutubeURL: {song.youtubeURL ?
