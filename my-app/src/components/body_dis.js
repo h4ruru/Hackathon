@@ -4,8 +4,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { getSongs } from '../firebace/operation';
 
 const Musicdistribution = ({ onResultClick }) => {
-  const [songs, setSongs] = useState([]); // 検索結果を保存する状態
-  const [filteredSongs, setFilteredSongs] = useState([]); // フィルタリング後の楽曲データ
+  const [songs, setSongs] = useState([]);
+  const [filteredSongs, setFilteredSongs] = useState([]);
   const [songName, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
@@ -13,17 +13,15 @@ const Musicdistribution = ({ onResultClick }) => {
   const [situation, setSituation] = useState("");
   const [lyricsType, setLyricsType] = useState("");
 
-  // 初期データの取得
   useEffect(() => {
     const fetchSongs = async () => {
       const fetchedSongs = await getSongs();
       setSongs(fetchedSongs);
-      setFilteredSongs(fetchedSongs); // 初期はすべての楽曲を表示
+      setFilteredSongs(fetchedSongs);
     };
     fetchSongs();
   }, []);
 
-  // フィルタリング処理
   const handleFilter = () => {
     const filtered = songs.filter((song) => {
       return (
@@ -35,8 +33,16 @@ const Musicdistribution = ({ onResultClick }) => {
         ((song.lyricsType && song.lyricsType === lyricsType) || lyricsType === "")
       );
     });
-
+    d2b394f40dffea770990ce06eb8a430ecf77180d
     setFilteredSongs(filtered);
+  };
+
+  // URLの短縮
+  const shortenUrl = (url) => {
+    if (url && url.length > 30) {
+      return url.slice(0, 30) + "...";
+    }
+    return url;
   };
 
   return (
@@ -148,9 +154,15 @@ const Musicdistribution = ({ onResultClick }) => {
           <ul>
             {filteredSongs.map((song, index) => (
               <li key={index}>
-                <h4>{song.songName || "楽曲名なし"}</h4>
+                <h4>{song.songName && song.songName !== "楽曲" ? song.songName : "楽曲名なし"}</h4>
                 <p>作詞・作曲者: {song.author || "作詞・作曲者名なし"}</p>
-                <p>YoutubeURL: {song.youtubeURL ? <a href={song.youtubeURL}>{song.youtubeURL}</a> : "URLなし"}</p>
+                <p>
+                  YoutubeURL: {song.youtubeURL ?
+                    <a href={song.youtubeURL} >
+                      {shortenUrl(song.youtubeURL) || song.youtubeURL}
+                    </a> : "URLなし"}
+                </p>
+
                 <p>ジャンル: {song.genre || "ジャンル情報なし"}</p>
                 <p>気分: {song.mood || "気分情報なし"}</p>
                 <p>シチュエーション: {song.situation || "シチュエーション情報なし"}</p>

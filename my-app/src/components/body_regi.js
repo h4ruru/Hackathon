@@ -13,7 +13,7 @@ function Musicdistribution() {
   const [lyricsType, setLyricsType] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ページリロードを防ぐ
+    e.preventDefault();
 
     if (!songName || !author || !mood || !situation || !genre || !lyricsType || !youtubeURL) {
       alert("全てのフィールドを入力してください");
