@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css_folder/input.css";
 import SaveIcon from '@mui/icons-material/Save';
 
 const Musicdistribution = () => {
+
   return (
     <div className="container">
       <h2>楽曲登録</h2>
@@ -26,7 +27,7 @@ const Musicdistribution = () => {
             <option value="rock">ロック</option>
             <option value="jazz">ジャズ</option>
             <option value="classical">クラシック</option>
-            <option valie="hiphop">ヒップホップ</option>
+            <option value="hiphop">ヒップホップ</option>
           </select>
         </div>
 
@@ -45,7 +46,7 @@ const Musicdistribution = () => {
           <input type="text" id="lyricist" placeholder="歌詞のタイプを入力してください" />
         </div>
 
-        < button type="submit" className="submit-button"><SaveIcon /> 登録</button>
+        <button type="submit" className="submit-button"><SaveIcon /> 登録</button>
       </form>
     </div>
   );

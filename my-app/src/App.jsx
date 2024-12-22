@@ -2,28 +2,37 @@
 import React, { useState } from 'react';
 
 import './App.css';
-import Distribute from './components/body_dis';
+import Display from './components/body_dis';
 import Resister from './components/body_regi'
 import Header from './components/header.jsx';
+import Result from './components/view_components/search_results.js'
 
 function App() {
-  const [showDistribute, setShowDistribute] = useState(true);
+  const [showDisplay, setShowDisplay] = useState(true);
   const [showResister, setShowResister] = useState(false);
+  const [showResult, setShowResult] = useState(false);
 
   const handleRegiClick = () => {
-    setShowDistribute(false);
+    setShowDisplay(false);
+    setShowResult(false);
     setShowResister(true);
   };
 
   const handleHomeClick = () => {
-    setShowDistribute(true);
+    setShowDisplay(true);
+    setShowResult(false);
     setShowResister(false);
   };
+
+  const handleResultClick = () => {
+    setShowResult(true);
+  }
 
   return (
     <>
       <Header onRegiClick={handleRegiClick} onHomeClick={handleHomeClick} />
-      {showDistribute && <Distribute />}
+      {showDisplay && <Display onResultClick={handleResultClick} />}
+      {showResult && <Result />}
       {showResister && <Resister />}
     </>
   );

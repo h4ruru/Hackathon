@@ -2,7 +2,7 @@ import React from "react";
 import "./css_folder/view.css";
 import SearchIcon from '@mui/icons-material/Search';
 
-const Musicdistribution = () => {
+const Musicdistribution = ({ onResultClick }) => {
   return (
     <div className="container">
       <h2>楽曲検索</h2>
@@ -45,7 +45,7 @@ const Musicdistribution = () => {
           <input type="text" id="lyricist" placeholder="歌詞のタイプを入力してください" />
         </div>
 
-        <button type="submit" className="submit-button"><SearchIcon /> 検索</button>
+        <button type="button" className="submit-button" onClick={onResultClick}><SearchIcon /> 検索</button>
       </form>
     </div>
   );
