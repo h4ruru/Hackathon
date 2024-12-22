@@ -3,20 +3,12 @@ import "./css_folder/input.css";
 import SaveIcon from '@mui/icons-material/Save';
 
 const Musicdistribution = () => {
-  const [showMessage, setShowMessage] = useState(false);
-
-  // 登録ボタンがクリックされたときの処理
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 3000);
-  };
 
   return (
     <div className="container">
       <h2>楽曲登録</h2>
       <p>新しい楽曲情報を登録できます</p>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form">
         <div className="form-group">
           <label htmlFor="songName">楽曲名</label>
           <input type="text" id="songName" placeholder="楽曲名を入力してください" />
@@ -56,8 +48,6 @@ const Musicdistribution = () => {
 
         <button type="submit" className="submit-button"><SaveIcon /> 登録</button>
       </form>
-
-      {showMessage && <div className="success-message">登録しました。</div>}
     </div>
   );
 };
