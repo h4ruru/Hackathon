@@ -33,7 +33,7 @@ const Musicdistribution = ({ onResultClick }) => {
         ((song.lyricsType && song.lyricsType === lyricsType) || lyricsType === "")
       );
     });
-    d2b394f40dffea770990ce06eb8a430ecf77180d
+    // d2b394f40dffea770990ce06eb8a430ecf77180d
     setFilteredSongs(filtered);
   };
 
@@ -162,7 +162,6 @@ const Musicdistribution = ({ onResultClick }) => {
                       {shortenUrl(song.youtubeURL) || song.youtubeURL}
                     </a> : "URLなし"}
                 </p>
-
                 <p>ジャンル: {song.genre || "ジャンル情報なし"}</p>
                 <p>気分: {song.mood || "気分情報なし"}</p>
                 <p>シチュエーション: {song.situation || "シチュエーション情報なし"}</p>
