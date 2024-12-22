@@ -9,19 +9,19 @@ async function getSongs() {
       return [];
     }
 
-    // ドキュメントを配列に変換
+
     const songs = snapshot.docs.map(doc => ({
-      id: doc.id, // ドキュメント ID
-      songName: doc.data().songName, // songName フィールド
-      author: doc.data().author, // author フィールド
-      genre: doc.data().genre, // genre フィールド
-      mood: doc.data().mood, // mood フィールド
-      situation: doc.data().situation, // situation フィールド
-      lyricsType: doc.data().lyricsType, // lyricsType フィールド
-      youtubeURL: doc.data().youtubeURL, // youtubeURL フィールド
+      id: doc.id, 
+      songName: doc.data().songName,
+      author: doc.data().author,
+      genre: doc.data().genre,
+      mood: doc.data().mood,
+      situation: doc.data().situation,
+      lyricsType: doc.data().lyricsType,
+      youtubeURL: doc.data().youtubeURL,
     }));
 
-    console.log("Fetched songs:", songs); // 確認用ログ
+    console.log("Fetched songs:", songs);
     return songs;
   } catch (error) {
     console.error("Failed to fetch songs:", error);
@@ -46,24 +46,24 @@ async function addSong(song) {
 
 async function updateSong(songName, updatedSong) {
   try {
-    const songsCollection = collection(db, "songs"); // "songs" コレクションを参照
-    const q = query(songsCollection, where("name", "==", songName)); // 曲名で検索するクエリ
+    const songsCollection = collection(db, "songs");
+    const q = query(songsCollection, where("name", "==", songName));
 
-    const querySnapshot = await getDocs(q); // クエリを実行して結果を取得
+    const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
-      console.log("No songs found with that name."); // 曲名に一致するドキュメントがない場合
+      console.log("No songs found with that name.");
       return;
     }
 
     // 該当するドキュメントを更新
     querySnapshot.forEach(async (docSnap) => {
-      const songRef = doc(db, "songs", docSnap.id); // 更新するドキュメントを参照
-      await updateDoc(songRef, updatedSong); // 新しいデータで更新
+      const songRef = doc(db, "songs", docSnap.id);
+      await updateDoc(songRef, updatedSong);
       console.log(`Document with ID: ${docSnap.id} successfully updated!`);
     });
   } catch (error) {
-    console.error("Error updating document:", error); // エラーが発生した場合、エラーログを表示
+    console.error("Error updating document:", error);
   }
 }
 
@@ -71,23 +71,22 @@ async function updateSong(songName, updatedSong) {
 
 async function deleteSong(songName) {
     try {
-      const songsCollection = collection(db, "songs"); // "songs" コレクションを参照
-      const q = query(songsCollection, where("name", "==", songName)); // 曲名で検索するクエリ
+      const songsCollection = collection(db, "songs");
+      const q = query(songsCollection, where("name", "==", songName));
   
-      const querySnapshot = await getDocs(q); // クエリを実行して結果を取得
+      const querySnapshot = await getDocs(q);
   
       if (querySnapshot.empty) {
-        console.log("No songs found with that name."); // 曲名に一致するドキュメントがない場合
+        console.log("No songs found with that name.");
         return;
       }
   
-      // 該当するドキュメントを削除
       querySnapshot.forEach(async (docSnap) => {
-        await deleteDoc(doc(db, "songs", docSnap.id)); // ドキュメントを削除
+        await deleteDoc(doc(db, "songs", docSnap.id));
         console.log(`Document with ID: ${docSnap.id} deleted successfully!`);
       });
     } catch (error) {
-      console.error("Error deleting document:", error); // エラーが発生した場合、エラーログを表示
+      console.error("Error deleting document:", error);
     }
 }
 
@@ -98,7 +97,7 @@ export { getSongs, addSong, updateSong, deleteSong };
 
 // GETする処理
 // import React, { useEffect, useState } from "react";
-// import { getSongs } from "../firebace/operation"; // データ取得関数をインポート
+// import { getSongs } from "../firebace/operation";
 // function SongList() {
 //   const [songs, setSongs] = useState([]);
 //   const [loading, setLoading] = useState(true);
@@ -106,23 +105,23 @@ export { getSongs, addSong, updateSong, deleteSong };
 //     async function fetchSongs() {
 //       try {
 //         const fetchedSongs = await getSongs();
-//         setSongs(fetchedSongs); // データを state に設定
+//         setSongs(fetchedSongs);
 //       } catch (error) {
 //         console.error("Failed to fetch songs:", error);
 //       } finally {
-//         setLoading(false); // ローディング完了
+//         setLoading(false);
 //       }
 //     }
 //     fetchSongs();
 //   }, []);
 //   if (loading) {
-//     return <p>Loading...</p>; // ローディング中の表示
+//     return <p>Loading...</p>;
 //   }
 //   return (
 //     <div>
 //       <h1>Song List</h1>
 //       {songs.length === 0 ? (
-//         <p>No songs found.</p> // データが空の場合
+//         <p>No songs found.</p>
 //       ) : (
 //         <ul>
 //           {songs.map(song => (
@@ -146,17 +145,16 @@ export { getSongs, addSong, updateSong, deleteSong };
 
 //POSTする処理
 // import React, { useState } from "react";
-// import { addSong } from "../firebase/operation"; // addSong 関数をインポート
+// import { addSong } from "../firebase/operation";
 // function AddSongForm() {
-//   const [name, setName] = useState(""); // 曲名を保存
-//   const [author, setAuthor] = useState(""); // 作曲者を保存
-//   // フォーム送信時に曲を追加する処理
+//   const [name, setName] = useState("");
+//   const [author, setAuthor] = useState("");
 //   const handleSubmit = async (event) => {
-//     event.preventDefault(); // ページリロードを防ぐ
-//     const song = { name, author }; // 入力された値を song オブジェクトに格納
-//     await addSong(song); // Firestore に曲を追加
-//     setName(""); // フォームの入力値をリセット
-//     setAuthor(""); // フォームの入力値をリセット
+//     event.preventDefault();
+//     const song = { name, author };
+//     await addSong(song);
+//     setName("");
+//     setAuthor("");
 //   };
 //   return (
 //     <div>
@@ -167,7 +165,7 @@ export { getSongs, addSong, updateSong, deleteSong };
 //           <input
 //             type="text"
 //             value={name}
-//             onChange={(e) => setName(e.target.value)} // 入力値を state に保存
+//             onChange={(e) => setName(e.target.value)}
 //             required
 //           />
 //         </label>
@@ -177,7 +175,7 @@ export { getSongs, addSong, updateSong, deleteSong };
 //           <input
 //             type="text"
 //             value={author}
-//             onChange={(e) => setAuthor(e.target.value)} // 入力値を state に保存
+//             onChange={(e) => setAuthor(e.target.value)}
 //             required
 //           />
 //         </label>
@@ -197,11 +195,11 @@ export { getSongs, addSong, updateSong, deleteSong };
 
 //PUTする処理
 // import React, { useState } from "react";
-// import { updateSong } from "../firebace/operation"; // updateSongByName 関数をインポート
+// import { updateSong } from "../firebace/operation";
 // function UpdateSongForm() {
-//   const [songName, setSongName] = useState(""); // 曲名を保存
-//   const [newName, setNewName] = useState(""); // 更新後の曲名を保存
-//   const [newAuthor, setNewAuthor] = useState(""); // 更新後の作者名を保存
+//   const [songName, setSongName] = useState("");
+//   const [newName, setNewName] = useState("");
+//   const [newAuthor, setNewAuthor] = useState("");
 //   // フォーム送信時に曲を更新する処理
 //   const handleSubmit = async (event) => {
 //     event.preventDefault(); // ページリロードを防ぐ
@@ -210,7 +208,7 @@ export { getSongs, addSong, updateSong, deleteSong };
 //       name: newName,
 //       author: newAuthor,
 //     };
-//     await updateSong(songName, updatedSong); // 曲名で該当する曲を更新
+//     await updateSong(songName, updatedSong);
 //     setSongName(""); // フォームの入力値をリセット
 //     setNewName(""); // 新しい曲名をリセット
 //     setNewAuthor(""); // 新しい作者名をリセット

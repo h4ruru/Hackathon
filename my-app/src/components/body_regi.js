@@ -13,7 +13,7 @@ function Musicdistribution(){
   const [lyricsType, setLyricsType] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ページリロードを防ぐ
+    e.preventDefault();
 
     if (!songName || !author || !mood || !situation || !genre || !lyricsType || !youtubeURL) {
       alert("全てのフィールドを入力してください");
@@ -79,7 +79,7 @@ function Musicdistribution(){
             type="text" id="youtubeURL" 
             value={youtubeURL}
             onChange={(e) => setYoutubeURL(e.target.value)}
-            placeholder="作詞・作曲者名を入力してください"
+            placeholder="YoutubeのURLを入力してください"
             required
           />
         </div>
