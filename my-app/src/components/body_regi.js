@@ -21,7 +21,7 @@ function Musicdistribution() {
     }
 
     const newSong = {
-      name: songName,
+      songName: songName,
       author: author,
       youtubeURL: youtubeURL,
       genre: genre,
