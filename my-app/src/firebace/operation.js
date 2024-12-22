@@ -2,44 +2,43 @@ import { collection, getDocs, setDoc,  doc, query, where, updateDoc, deleteDoc }
 import { db } from "../firebase";
 
 async function getSongs() {
-    try {
-      const snapshot = await getDocs(collection(db, "songs")); // songs コレクションを参照
-      if (snapshot.empty) {
-        console.log("No matching documents."); // データがない場合
-        return [];
-      }
-  
-      // ドキュメントを配列に変換
-      const songs = snapshot.docs.map(doc => ({
-        id: doc.id, // ドキュメント ID
-        name: doc.data().name, // name フィールド
-        author: doc.data().author, // author フィールド
-      }));
-  
-      console.log("Fetched songs:", songs); // 確認用ログ
-      return songs;
-    } catch (error) {
-      console.error("Failed to fetch songs:", error); // エラーをキャッチ
+  try {
+    const snapshot = await getDocs(collection(db, "songs")); // songs コレクションを参照
+    if (snapshot.empty) {
+      console.log("No matching documents.");
+      return [];
     }
+
+    // ドキュメントを配列に変換
+    const songs = snapshot.docs.map(doc => ({
+      id: doc.id, // ドキュメント ID
+      songName: doc.data().songName, // songName フィールド
+      author: doc.data().author, // author フィールド
+      genre: doc.data().genre, // genre フィールド
+      mood: doc.data().mood, // mood フィールド
+      situation: doc.data().situation, // situation フィールド
+      lyricsType: doc.data().lyricsType, // lyricsType フィールド
+      youtubeURL: doc.data().youtubeURL, // youtubeURL フィールド
+    }));
+
+    console.log("Fetched songs:", songs); // 確認用ログ
+    return songs;
+  } catch (error) {
+    console.error("Failed to fetch songs:", error);
+  }
 }
 
 
 async function addSong(song) {
     try {
-      // "songs" コレクションのドキュメント数を取得
       const snapshot = await getDocs(collection(db, "songs"));
-      const docCount = snapshot.size; // ドキュメント数がインデックス番号となる
-  
-      // 新しいドキュメントIDとして docCount を使用
-      const docId = (docCount + 1).toString(); // インデックス番号は 1 から始まる
-  
-      // "songs" コレクションに新しいドキュメントを追加
-      const docRef = doc(db, "songs", docId); // カスタムIDを指定
-      await setDoc(docRef, song); // 曲データを追加
-  
-      console.log("Document written with ID:", docId); // 成功した場合、IDをログに表示
+      const docCount = snapshot.size;
+      const docId = (docCount + 1).toString();
+      const docRef = doc(db, "songs", docId);
+      await setDoc(docRef, song);
+      console.log("Document written with ID:", docId);
     } catch (error) {
-      console.error("Error adding document:", error); // エラーが発生した場合、エラーログを表示
+      console.error("Error adding document:", error);
     }
 }
 

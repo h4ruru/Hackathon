@@ -1,36 +1,96 @@
 import React, { useState } from "react";
 import "./css_folder/input.css";
 import SaveIcon from '@mui/icons-material/Save';
-import { getSongs } from "../firebace/operation"; // データ取得関数をインポート
+import { addSong } from "../firebace/operation"; 
 
-const Musicdistribution = () => {
-  const [songData, setSongData] = useState({
-    songName: "",
-    author: "",
-    genre: "",
-    mood: "",
-    situation: "",
-    lyricist: "",
-  });
+function Musicdistribution(){
+  const [songName, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [youtubeURL, setYoutubeURL] = useState("");
+  const [genre, setGenre] = useState("");
+  const [mood, setMood] = useState("");
+  const [situation, setSituation] = useState("");
+  const [lyricsType, setLyricsType] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // ページリロードを防ぐ
+
+    if (!songName || !author || !mood || !situation || !genre || !lyricsType || !youtubeURL) {
+      alert("全てのフィールドを入力してください");
+      return;
+    }
+
+    const newSong = {
+      name: songName,
+      author: author,
+      youtubeURL: youtubeURL,
+      genre: genre,
+      mood: mood,
+      situation: situation,
+      lyricsType: lyricsType,
+    };
+
+    try {
+      await addSong(newSong);
+      alert("楽曲が正常に登録されました！");
+      setName("");
+      setAuthor("");
+      setYoutubeURL("");
+      setGenre("");
+      setMood("");
+      setSituation("");
+      setLyricsType("");
+    } catch (error) {
+      console.error("楽曲の登録に失敗しました:", error);
+      alert("楽曲の登録中にエラーが発生しました");
+    }
+  };
 
   return (
     <div className="container">
       <h2>楽曲登録</h2>
       <p>新しい楽曲情報を登録できます</p>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="songName">楽曲名</label>
-          <input type="text" id="songName" placeholder="楽曲名を入力してください" />
+          <input 
+            type="text" id="songName" 
+            value={songName}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="楽曲名を入力してください" 
+            required
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="author">作詞・作曲者名</label>
-          <input type="text" id="author" placeholder="作詞・作曲者名を入力してください" />
+          <input 
+            type="text" id="author" 
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            placeholder="作詞・作曲者名を入力してください"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="youtubeURL">YoutubeURL</label>
+          <input 
+            type="text" id="youtubeURL" 
+            value={youtubeURL}
+            onChange={(e) => setYoutubeURL(e.target.value)}
+            placeholder="作詞・作曲者名を入力してください"
+            required
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="genre">ジャンル</label>
-          <select id="genre">
+          <select id="genre"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            required
+          >
             <option value="">選択してください</option>
             <option value="pop">ポップ</option>
             <option value="rock">ロック</option>
@@ -42,7 +102,12 @@ const Musicdistribution = () => {
 
         <div className="form-group">
           <label htmlFor="mood">気分</label>
-          <select id="mood">
+          <select 
+            id="mood"
+            value={mood}
+            onChange={(e) => setMood(e.target.value)}
+            required
+          >
             <option value="">選択してください</option>
             <option value="happy">楽しい</option>
             <option value="sadly">悲しい</option>
@@ -54,7 +119,12 @@ const Musicdistribution = () => {
 
         <div className="form-group">
           <label htmlFor="situation">シチュエーション</label>
-          <select id="situation">
+          <select 
+            id="situation"
+            value={situation}
+            onChange={(e) => setSituation(e.target.value)}
+            required
+          >
             <option value="">選択してください</option>
             <option value="relaxation">リラックスしたい</option>
             <option value="commute">通勤・通学</option>
@@ -67,7 +137,12 @@ const Musicdistribution = () => {
 
         <div className="form-group">
           <label htmlFor="lyricsType">歌詞のタイプ</label>
-          <select id="lyricsType">
+          <select 
+            id="lyricsType"
+            value={lyricsType}
+            onChange={(e) => setLyricsType(e.target.value)}
+            required
+          >
             <option value="">選択してください</option>
             <option value="love">恋愛</option>
             <option value="heartbreak">失恋</option>
@@ -82,5 +157,4 @@ const Musicdistribution = () => {
     </div>
   );
 };
-
-export default Musicdistribution;
+export default Musicdistribution

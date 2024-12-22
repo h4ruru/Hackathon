@@ -1,8 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./css_folder/view.css";
 import SearchIcon from '@mui/icons-material/Search';
+import { getSongs } from '../firebace/operation';
 
 const Musicdistribution = ({ onResultClick }) => {
+  const [songs, setSongs] = useState([]); // 検索結果を保存する状態
+  const [filteredSongs, setFilteredSongs] = useState([]); // フィルタリング後の楽曲データ
+  const [songName, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [genre, setGenre] = useState("");
+  const [mood, setMood] = useState("");
+  const [situation, setSituation] = useState("");
+  const [lyricsType, setLyricsType] = useState("");
+
+  // 初期データの取得
+  useEffect(() => {
+    const fetchSongs = async () => {
+      const fetchedSongs = await getSongs();
+      setSongs(fetchedSongs);
+      setFilteredSongs(fetchedSongs); // 初期はすべての楽曲を表示
+    };
+    fetchSongs();
+  }, []);
+
+  // フィルタリング処理
+  const handleFilter = () => {
+    const filtered = songs.filter((song) => {
+      return (
+        ((song.songName && song.songName.includes(songName)) || songName === "") &&
+        ((song.author && song.author.includes(author)) || author === "") &&
+        ((song.genre && song.genre === genre) || genre === "") &&
+        ((song.mood && song.mood === mood) || mood === "") &&
+        ((song.situation && song.situation === situation) || situation === "") &&
+        ((song.lyricsType && song.lyricsType === lyricsType) || lyricsType === "")
+      );
+    });
+    
+    setFilteredSongs(filtered);
+  };
+
   return (
     <div className="container">
       <h2>楽曲検索</h2>
@@ -10,17 +46,33 @@ const Musicdistribution = ({ onResultClick }) => {
       <form className="form">
         <div className="form-group">
           <label htmlFor="songName">楽曲名</label>
-          <input type="text" id="songName" placeholder="楽曲名を入力してください" />
+          <input 
+            type="text"
+            id="songName"
+            placeholder="楽曲名を入力してください"
+            value={songName}
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="author">作詞・作曲者名</label>
-          <input type="text" id="author" placeholder="作詞・作曲者名を入力してください" />
+          <input 
+            type="text"
+            id="author"
+            placeholder="作詞・作曲者名を入力してください"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="genre">ジャンル</label>
-          <select id="genre">
+          <select 
+            id="genre"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          >
             <option value="">選択してください</option>
             <option value="pop">ポップ</option>
             <option value="rock">ロック</option>
@@ -32,7 +84,11 @@ const Musicdistribution = ({ onResultClick }) => {
 
         <div className="form-group">
           <label htmlFor="mood">気分</label>
-          <select id="mood">
+          <select
+            id="mood"
+            value={mood}
+            onChange={(e) => setMood(e.target.value)}
+          >
             <option value="">選択してください</option>
             <option value="happy">楽しい</option>
             <option value="sadly">悲しい</option>
@@ -44,7 +100,11 @@ const Musicdistribution = ({ onResultClick }) => {
 
         <div className="form-group">
           <label htmlFor="situation">シチュエーション</label>
-          <select id="situation">
+          <select
+            id="situation"
+            value={situation}
+            onChange={(e) => setSituation(e.target.value)}
+          >
             <option value="">選択してください</option>
             <option value="relaxation">リラックスしたい</option>
             <option value="commute">通勤・通学</option>
@@ -57,7 +117,11 @@ const Musicdistribution = ({ onResultClick }) => {
 
         <div className="form-group">
           <label htmlFor="lyricsType">歌詞のタイプ</label>
-          <select id="lyricsType">
+          <select
+            id="lyricsType"
+            value={lyricsType}
+            onChange={(e) => setLyricsType(e.target.value)}
+          >
             <option value="">選択してください</option>
             <option value="love">恋愛</option>
             <option value="heartbreak">失恋</option>
@@ -67,8 +131,35 @@ const Musicdistribution = ({ onResultClick }) => {
           </select>
         </div>
 
-        <button type="button" className="submit-button" onClick={onResultClick}><SearchIcon /> 検索</button>
+        <button
+          type="button"
+          className="submit-button"
+          onClick={() => {
+            handleFilter();
+            onResultClick();
+          }}
+        ><SearchIcon /> 検索</button>
       </form>
+      <div className="results">
+        <h3>検索結果</h3>
+        {filteredSongs.length === 0 ? (
+          <p>一致する楽曲がありません</p>
+        ) : (
+          <ul>
+            {filteredSongs.map((song, index) => (
+              <li key={index}>
+                <h4>{song.songName || "楽曲名なし"}</h4>
+                <p>作詞・作曲者: {song.author || "作詞・作曲者名なし"}</p>
+                <p>YoutubeURL: {song.youtubeURL || "URLなし"}</p>
+                <p>ジャンル: {song.genre || "ジャンル情報なし"}</p>
+                <p>気分: {song.mood || "気分情報なし"}</p>
+                <p>シチュエーション: {song.situation || "シチュエーション情報なし"}</p>
+                <p>歌詞のタイプ: {song.lyricsType || "歌詞タイプ情報なし"}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
