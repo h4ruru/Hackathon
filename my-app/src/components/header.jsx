@@ -11,7 +11,7 @@ function Header({ onRegiClick, onHomeClick }) {
       <div className="header-left">
         {/* ロゴとタイトル */}
         <AudioIcon className="header-icon-logo" />
-        <span className="header-title">音楽データベース</span>
+        <span className="header-title">まえはらみゅーじっく</span>
       </div>
 
       <div className="header-center">

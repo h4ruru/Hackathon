@@ -60,3 +60,74 @@ h2 {
 .submit-button:hover {
   background-color: #3b41a1;
 }
+
+/* .results {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.results h3 {
+  text-align: center;
+  color: #4f45e4;
+  margin-bottom: 1rem;
+}
+
+.results ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.results li {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.results li h4 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.results li p {
+  color: #666;
+  margin: 0.3rem 0;
+}
+
+.results li p:last-child {
+  margin-bottom: 0;
+}
+
+.results li p a {
+  color: #4f45e4;
+  text-decoration: none;
+  word-wrap: break-word;
+  /* Break long words to fit within the container */
+  word-break: break-all;
+  /* Break words at arbitrary points if necessary */
+  overflow-wrap: break-word;
+  /* Ensure long words are wrapped */
+  display: inline-block;
+  /* Make the link behave like a block-level element */
+  max-width: 100%;
+  /* Allow the link to take up the full available width */
+  white-space: normal;
+  /* Allow the link to wrap to the next line */
+}
+
+.results li p a:hover {
+  text-decoration: underline;
+}
+
+
+.results p {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 1rem;
+}
